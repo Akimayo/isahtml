@@ -1,0 +1,54 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+
+//$primary: #26C281;
+$primary: #1F7996;
+$success: #5F9E77;
+$danger: #DF5143;
+
+$font-size-base: 0.9rem;
+$btn-font-size: 0.9rem;
+
+$border-radius: 0;
+$btn-border-radius: 0;
+$input-border-radius: 0;
+$card-border-radius: 0;
+$nav-tabs-border-radius: 0;
+
+$pagination-color: $primary;
+$pagination-hover-color: $primary;
+$pagination-active-bg: $primary;
+$pagination-active-border-color: $primary;
+$pagination-focus-box-shadow: none;
+$pagination-disabled-bg: $input-disabled-bg;
+
+$custom-control-indicator-checked-bg: $primary;
+$custom-control-indicator-checked-border-color: $primary;
+$custom-control-indicator-checked-disabled-bg: $primary;
+$custom-select-border-radius: 0;
+
+$alert-border-radius: 0;
+$alert-border-level: 0;
+$alert-bg-level: 0;
+$alert-color-level: -12;
+
+$modal-content-border-radius: 0;
+$modal-content-inner-border-radius: 0;
+
+$nav-pills-link-active-bg: $primary;
+$nav-pills-border-radius: 0;
+
+$link-color: $primary;
+
+$gray: $gray-400;
+$grey: $gray;
+
+$theme-colors: map_merge(
+                $theme-colors,
+                (
+                        'primary': $primary,
+                        'success': $success,
+                        'danger': $danger,
+                        'gray': $grey
+                )
+);
