@@ -1,8 +1,14 @@
 import React from 'react';
+import Animation from './libs/p5/Animation';
+
+import sketch from './showcaseSketch';
+import webgl from './showcaseWebGL';
 
 function Showcase() {
     return (
         <div className="container">
+            <Animation sketch={sketch} />
+            <Animation sketch={webgl} />
             <h1>This is a h1</h1>
             <h2>This is a h2</h2>
             <h3>This is a h3</h3>
