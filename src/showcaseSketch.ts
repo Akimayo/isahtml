@@ -1,4 +1,6 @@
-const sketch = (p) => {
+import p5 from "p5";
+
+const sketch = (p: p5) => {
     const textSize = 48;
     const wobble = 4;
     let framecount = 0;

@@ -1,4 +1,6 @@
-const webgl = (p) => {
+import p5 from "p5";
+
+const webgl = (p: p5) => {
     p.setup = () => p.createCanvas(800, 200, p.WEBGL);
     p.draw = () => {
         p.background(0);
