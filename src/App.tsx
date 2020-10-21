@@ -3,30 +3,23 @@ import React from 'react';
 import './App.scss';
 import {Route, Router, Switch} from "react-router";
 import HomePage from "./pages/Homepage";
+import AnimationsPage from "./pages/Animations";
 import Header from "./components/Header";
 
-import { createBrowserHistory } from "history";
-import P5JPage from "./pages/P5J";
-
-const customHistory = createBrowserHistory();
+import AccessibilityPage from './pages/Accessibility';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
     return (
-        <Router history={customHistory}>
+        <BrowserRouter>
             <Header/>
 
             <Switch>
-                <Route path={'/'}>
-                    <HomePage/>
-                </Route>
-                <Route path={'/p5j'}>
-                    <P5JPage />
-                </Route>
-                <Route path={'/accessibility'}>
-                    <HomePage/>
-                </Route>
+                <Route exact path={'/'} component={HomePage}  />
+                <Route path={'/webgl'} component={AnimationsPage} />
+                <Route path={'/accessibility'} component={AccessibilityPage} />
             </Switch>
-        </Router>
+        </BrowserRouter>
     );
 }
 
