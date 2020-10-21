@@ -5,11 +5,11 @@ interface HomePageProps {
 }
 
 const HomePage = (props: HomePageProps) => {
- return (
-  <div>
+  return (
+    <div>
       Some shit in homepage
-  </div>
- )
+    </div>
+  )
 }
 
 export default HomePage

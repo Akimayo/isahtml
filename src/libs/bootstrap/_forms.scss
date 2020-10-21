@@ -7,14 +7,14 @@
 textarea:focus,
 textarea.form-control:focus,
 input.form-control:focus,
-input[type=text]:focus,
-input[type=password]:focus,
-input[type=email]:focus,
-input[type=number]:focus,
-[type=text].form-control:focus,
-[type=password].form-control:focus,
-[type=email].form-control:focus,
-[type=tel].form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
 [contenteditable].form-control:focus,
 .custom-select:focus,
 select:focus {
@@ -31,11 +31,12 @@ select {
   padding-right: 20px;
 }
 
-input[type=password].form-control:focus {
+input[type="password"].form-control:focus {
   border-bottom-color: $secondary;
 }
 
-button:disabled, input:disabled {
+button:disabled,
+input:disabled {
   cursor: default;
 }
 

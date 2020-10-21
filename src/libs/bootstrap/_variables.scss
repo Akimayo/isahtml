@@ -2,9 +2,9 @@
 @import "node_modules/bootstrap/scss/variables";
 
 //$primary: #26C281;
-$primary: #1F7996;
-$success: #5F9E77;
-$danger: #DF5143;
+$primary: #1f7996;
+$success: #5f9e77;
+$danger: #df5143;
 
 $font-size-base: 0.9rem;
 $btn-font-size: 0.9rem;
@@ -44,11 +44,11 @@ $gray: $gray-400;
 $grey: $gray;
 
 $theme-colors: map_merge(
-                $theme-colors,
-                (
-                        'primary': $primary,
-                        'success': $success,
-                        'danger': $danger,
-                        'gray': $grey
-                )
+  $theme-colors,
+  (
+    "primary": $primary,
+    "success": $success,
+    "danger": $danger,
+    "gray": $grey,
+  )
 );
