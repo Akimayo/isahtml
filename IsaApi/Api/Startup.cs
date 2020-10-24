@@ -32,6 +32,8 @@ namespace IsaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+          services.AddCors();
+
             services
                 .AddDbContextPool<ApplicationDbContext>(
                     options => options
@@ -44,7 +46,7 @@ namespace IsaApi
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options => options.SetupApiCookie());
-            
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
