@@ -6,24 +6,23 @@ import {
   TaskGetResponse,
   TaskUpdateResponse
 } from "./Task.types";
-
-const authUrl = 'localhost:5000/api/tasks'
+import {API_URL} from "../constants";
 
 class TaskService {
   static async create(task: BaseTask) {
-    return await axios.post<TaskCreateResponse>(authUrl, task)
+    return await axios.post<TaskCreateResponse>(`${API_URL}/tasks`, task)
   }
 
   static async get() {
-    return await axios.post<TaskGetResponse>(authUrl)
+    return await axios.post<TaskGetResponse>(`${API_URL}/tasks`)
   }
 
   static async update(task: Task) {
-    return await axios.put<TaskUpdateResponse>(`${authUrl}/${task.id}`, task)
+    return await axios.put<TaskUpdateResponse>(`${API_URL}/tasks/${task.id}`, task)
   }
 
   static async delete(task: Task) {
-    return await axios.delete<TaskDeleteResponse>(`${authUrl}/${task.id}`)
+    return await axios.delete<TaskDeleteResponse>(`${API_URL}/tasks/${task.id}`)
   }
 }
 
