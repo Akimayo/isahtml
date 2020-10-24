@@ -13,3 +13,6 @@ class AuthService {
     return await axios.post<LoginResponse>(`${authUrl}login`, user)
   }
 }
+
+
+export default AuthService

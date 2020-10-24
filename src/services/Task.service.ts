@@ -26,3 +26,5 @@ class TaskService {
     return await axios.delete<TaskDeleteResponse>(`${authUrl}/${task.id}`)
   }
 }
+
+export default TaskService
