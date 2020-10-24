@@ -6,23 +6,23 @@ import {
   TaskGetResponse,
   TaskUpdateResponse
 } from "./Task.types";
-import {API_URL} from "../constants";
+import {API_PATH_PREFIX} from "../constants";
 
 class TaskService {
   static async create(task: BaseTask) {
-    return await axios.post<TaskCreateResponse>(`${API_URL}/tasks`, task)
+    return await axios.post<TaskCreateResponse>(`${API_PATH_PREFIX}/tasks`, task)
   }
 
   static async get() {
-    return await axios.post<TaskGetResponse>(`${API_URL}/tasks`)
+    return await axios.post<TaskGetResponse>(`${API_PATH_PREFIX}/tasks`)
   }
 
   static async update(task: Task) {
-    return await axios.put<TaskUpdateResponse>(`${API_URL}/tasks/${task.id}`, task)
+    return await axios.put<TaskUpdateResponse>(`${API_PATH_PREFIX}/tasks/${task.id}`, task)
   }
 
   static async delete(task: Task) {
-    return await axios.delete<TaskDeleteResponse>(`${API_URL}/tasks/${task.id}`)
+    return await axios.delete<TaskDeleteResponse>(`${API_PATH_PREFIX}/tasks/${task.id}`)
   }
 }
 
