@@ -32,7 +32,12 @@ namespace IsaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          services.AddCors();
+          services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+          {
+            builder.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+          }));
 
             services
                 .AddDbContextPool<ApplicationDbContext>(
@@ -65,7 +70,7 @@ namespace IsaApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors(b => b.AllowAnyOrigin());
+                app.UseCors("CorsPolicy");
             }
 
             app.UseRouting();
