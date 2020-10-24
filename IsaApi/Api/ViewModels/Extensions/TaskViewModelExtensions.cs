@@ -12,7 +12,8 @@ namespace IsaApi.ViewModels.Extensions
                 Id = entity.Id,
                 Description = entity.Description,
                 IsComplete = entity.CompletedAt != null,
-                Title = entity.Title
+                Title = entity.Title,
+                Tag = entity.Tag
             };
         }
     }

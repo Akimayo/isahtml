@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Data.Entities.Enums;
 
 namespace Data.Entities
 {
@@ -10,7 +11,7 @@ namespace Data.Entities
         public string Title { get; set; }
 
         public string Description { get; set; }
-        
+
         public Tags Tag { get; set; }
 
         public DateTime CreatedAt { get; set; }

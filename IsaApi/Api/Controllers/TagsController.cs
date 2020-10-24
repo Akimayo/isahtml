@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Data.Entities;
+using Data.Entities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

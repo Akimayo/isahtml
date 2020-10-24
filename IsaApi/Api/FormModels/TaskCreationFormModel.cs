@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using Data.Entities;
+using Data.Entities.Enums;
 
 namespace IsaApi.FormModels
 {
