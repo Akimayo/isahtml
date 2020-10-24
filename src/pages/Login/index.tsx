@@ -4,6 +4,7 @@ import AuthService from "../../services/Auth.service";
 import {FormikHelpers} from "formik/dist/types";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router";
+import {UserContext} from "../../contexts/User.context";
 
 interface LoginFormData {
   identity: string
@@ -13,6 +14,7 @@ interface LoginFormData {
 const LoginPage = () => {
   const { t } = useTranslation();
   const history = useHistory();
+  const { update } = useContext(UserContext);
 
   const loginFormInitialValues: LoginFormData = {
     identity: '',
@@ -21,7 +23,9 @@ const LoginPage = () => {
 
   const handleFormSubmit = useCallback(async ({identity, password}: LoginFormData, { setSubmitting }: FormikHelpers<LoginFormData>) => {
     try {
-      await AuthService.login({identity, password})
+      const response = await AuthService.login({identity, password})
+      update({ isLoading: false, user: response.data})
+      history.push('/dashboard')
     } catch (error) {
       console.error(error);
     } finally {

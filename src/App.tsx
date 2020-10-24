@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 import './App.scss';
-import { Route, Switch } from "react-router";
+import {Route, Switch, useHistory} from "react-router";
 import { BrowserRouter } from 'react-router-dom';
 
 import HomePage from "./pages/Homepage";
@@ -11,18 +11,14 @@ import LoginPage from "./pages/Login";
 
 import Header from "./components/Header";
 import AuthService from "./services/Auth.service";
-import {User} from "./entities/User";
-import { UserContext } from './contexts/User.context';
+import {UserContext, UserData} from './contexts/User.context';
 import {DashboardPage} from "./pages/Dashboard";
 
-interface UserData {
-  user: User | null
-  isLoading: boolean
-}
+const initialUserData = { user: null, isLoading: false }
 
 function App() {
-
-  const [userData, setUserData] = useState<UserData>({ user: null, isLoading: false })
+  const history = useHistory()
+  const [userData, setUserData] = useState<UserData>(initialUserData)
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -39,26 +35,36 @@ function App() {
     handleLogin()
   }, [])
 
+  const handleLogout = useCallback(async () => {
+    try {
+      await AuthService.logout();
+      setUserData(initialUserData)
+      history.push('/login')
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+
   if (userData.isLoading) {
     return <h1>Loading ...</h1>
   }
 
   return (
-    <UserContext.Provider value={userData}>
+    <UserContext.Provider value={{data: userData, update: setUserData}}>
       <BrowserRouter>
-        <Header />
+        <Header handleLogout={handleLogout} />
 
         <Switch>
           <Route exact path={'/'} component={HomePage} />
           <Route path={'/webgl'} component={AnimationsPage} />
           <Route path={'/accessibility'} component={AccessibilityPage} />
-          {!userData && (
+          {!userData.user && (
             <>
               <Route path={'/login'} component={LoginPage} />
             </>
           )}
 
-          {userData && (
+          {userData.user && (
             <>
               <Route path={'/dashboard'} component={DashboardPage} />
             </>
