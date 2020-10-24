@@ -4,6 +4,7 @@ using Data.Repositories.Interfaces;
 using IsaApi.FormModels;
 using IsaApi.FormModels.Extensions;
 using IsaApi.ViewModels.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -47,6 +48,14 @@ namespace IsaApi.Controllers
             IdentityResult result = await _userRepository.CreateAsync(ue, userRegistrationFormModel.Password);
             if (result.Succeeded) return Ok();
             return BadRequest(result.Errors);
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+          await _signInManager.SignOutAsync();
+          return Ok();
         }
     }
 }
