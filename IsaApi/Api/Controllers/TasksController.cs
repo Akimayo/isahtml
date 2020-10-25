@@ -22,7 +22,7 @@ namespace IsaApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(FilterTaskFormModel filterTaskFormModel)
+        public ActionResult Index([FromQuery] FilterTaskFormModel filterTaskFormModel)
         {
             string identity = HttpContext.User.Identity.Name;
             return Ok(
@@ -70,7 +70,7 @@ namespace IsaApi.Controllers
             string identity = HttpContext.User.Identity.Name;
             TaskEntity te = _taskRepository.Get(identity, id);
             if (te == null) return BadRequest();
-            
+
             _taskRepository.Delete(identity, te);
             return Ok();
         }
