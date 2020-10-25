@@ -1,3 +1,5 @@
+import {User} from "../entities/User";
+
 export interface LoginResponse {
   id: string
   username: string
@@ -6,3 +8,7 @@ export interface LoginResponse {
 }
 
 export interface RegisterResponse {}
+
+export interface DeleteResponse {}
+
+export interface GetCurrentUserResponse extends User {}

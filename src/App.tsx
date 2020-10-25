@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 import './App.scss';
-import { Route, Switch } from "react-router";
+import {Route, Switch, useHistory} from "react-router";
 import { BrowserRouter } from 'react-router-dom';
 
 import HomePage from "./pages/Homepage";
@@ -10,20 +10,70 @@ import AccessibilityPage from './pages/Accessibility';
 import LoginPage from "./pages/Login";
 
 import Header from "./components/Header";
+import AuthService from "./services/Auth.service";
+import {UserContext, UserData} from './contexts/User.context';
+import {DashboardPage} from "./pages/Dashboard";
 
+const initialUserData = { user: null, isLoading: false }
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Header />
+  const history = useHistory()
+  const [userData, setUserData] = useState<UserData>(initialUserData)
 
-      <Switch>
-        <Route exact path={'/'} component={HomePage} />
-        <Route path={'/webgl'} component={AnimationsPage} />
-        <Route path={'/accessibility'} component={AccessibilityPage} />
-        <Route path={'/login'} component={LoginPage} />
-      </Switch>
-    </BrowserRouter>
+  useEffect(() => {
+    const handleLogin = async () => {
+      try {
+        setUserData({ user: null, isLoading: true })
+        const result = await AuthService.getCurrentUser();
+        setUserData({ user: result.data, isLoading: false })
+      } catch (e) {
+        console.error(e)
+        setUserData({ user: null, isLoading: false })
+      }
+    }
+
+    handleLogin()
+  }, [])
+
+  const handleLogout = useCallback(async () => {
+    try {
+      await AuthService.logout();
+      setUserData(initialUserData)
+      history.push('/login')
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+
+  if (userData.isLoading) {
+    return <h1>Loading ...</h1>
+  }
+
+  return (
+    <UserContext.Provider value={{data: userData, update: setUserData}}>
+      <BrowserRouter>
+        <Header handleLogout={handleLogout} />
+
+        <Switch>
+          <Route exact path={'/'} component={HomePage} />
+          <Route path={'/webgl'} component={AnimationsPage} />
+          <Route path={'/accessibility'} component={AccessibilityPage} />
+          {!userData.user && (
+            <>
+              <Route path={'/login'} component={LoginPage} />
+            </>
+          )}
+
+          {userData.user && (
+            <>
+              <Route path={'/dashboard'} component={DashboardPage} />
+            </>
+          )}
+
+          <Route component={() => (<h1>404 NOT FOUND</h1>)} />
+        </Switch>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 
