@@ -14,7 +14,7 @@ class TaskService {
   }
 
   static async get() {
-    return await axios.post<TaskGetResponse>(`${API_PATH_PREFIX}/tasks`)
+    return await axios.get<TaskGetResponse>(`${API_PATH_PREFIX}/tasks`)
   }
 
   static async update(task: Task) {
