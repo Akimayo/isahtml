@@ -43,7 +43,7 @@ const Header = ({ handleLogout }: HeaderProps) => {
           {!userContext.data.user && (
             <>
               <li className="nav-item">
-                <NavLink to="/login" className="nav-link" activeClassName="active">{t("login")}</NavLink>
+                <NavLink to="/login" className="nav-link" activeClassName="active">{t("login.login")}</NavLink>
               </li>
             </>
           )}

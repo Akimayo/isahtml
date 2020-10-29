@@ -1,0 +1,15 @@
+{
+  "appName": "Název aplikace",
+  "home": "Domů",
+  "webgl": "Ukázka WebGL",
+  "accessibility": "Přístupnost",
+  "login": {
+    "login": "Přihlášení",
+    "form": {
+      "identity": "E-mail nebo uživatelské jméno",
+      "password": "Heslo",
+      "submit": "Přihlásit se"
+    }
+  },
+  "dashboard": "Seznam úkolů"
+}

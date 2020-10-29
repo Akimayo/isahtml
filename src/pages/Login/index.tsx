@@ -51,7 +51,7 @@ const LoginPage = () => {
           }) => (
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="identity">{t('login.form.identity.label')}</label>
+                <label htmlFor="identity">{t('login.form.identity')}</label>
                 <input
                   type="text"
                   id="identity"
@@ -63,7 +63,7 @@ const LoginPage = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">{t('login.form.password.label')}</label>
+                <label htmlFor="password">{t('login.form.password')}</label>
                 <input
                   type="password"
                   name="password"

@@ -3,9 +3,13 @@
   "home": "Home",
   "webgl": "WebGL Showcase",
   "accessibility": "Web Accessibility",
-  "login": "Login",
-  "login.form.identity.label": "Email or Username",
-  "login.form.password.label": "Password",
-  "login.form.login": "Login",
+  "login": {
+    "login": "Login",
+    "form": {
+      "identity": "Email or Username",
+      "password": "Password",
+      "submit": "Login"
+    }
+  },
   "dashboard": "Task List"
 }
