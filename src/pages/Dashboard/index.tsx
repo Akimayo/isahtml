@@ -28,7 +28,7 @@ export const DashboardPage = () => {
         <div className="col-12 col-md-8 col-lg-6 offset-lg-1 col-xl-4">
           <h1 className="display-4">Tasks</h1>
           {loading ? (<h1>Loading...</h1>) : (
-            <ul className="list-group list-group-flush mt-5">
+            <ul className="list-group list-group-flush">
               {tasks?.map((task: Task) => (
                 <TaskComponent
                   task={task}
