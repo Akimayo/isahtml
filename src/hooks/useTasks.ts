@@ -1,5 +1,5 @@
 import {useCallback, useState} from "react";
-import {Task} from "../entities/Task";
+import {BaseTask, Task} from "../entities/Task";
 import TaskService from "../services/Task.service";
 
 export interface TaskData {
@@ -21,11 +21,38 @@ const useTasks = () => {
       setTasks(entities)
       setTaskData(data)
     } catch (e) {
-      console.log(e)
+      console.error(e)
     } finally {
       setLoading(false);
     }
   }, [])
+
+  const createTask = useCallback(async (task: BaseTask) => {
+    try {
+      await TaskService.create(task);
+      await fetchTasks()
+    } catch (e) {
+      console.error(e)
+    }
+  }, [fetchTasks])
+
+  const removeTask = useCallback(async (task: Task) => {
+    try {
+      await TaskService.delete(task)
+      await fetchTasks()
+    } catch (e) {
+      console.error(e)
+    }
+  }, [fetchTasks])
+
+  const updateTask = useCallback(async (task: Task) => {
+    try {
+      await TaskService.update(task)
+      await fetchTasks()
+    } catch (e) {
+      console.error(e)
+    }
+  }, [fetchTasks])
 
   return {
     state: {
@@ -33,7 +60,12 @@ const useTasks = () => {
       tasks,
       taskData
     },
-    fetchTasks
+    actions: {
+      fetchTasks,
+      createTask,
+      removeTask,
+      updateTask,
+    }
   }
 }
 
