@@ -1,7 +1,7 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from "react-router-dom";
-import {UserContext} from "../../contexts/User.context";
+import { UserContext } from "../../contexts/User.context";
 
 interface HeaderProps {
   handleLogout: () => void
@@ -22,12 +22,12 @@ const Header = ({ handleLogout }: HeaderProps) => {
           <li className="nav-item">
             <NavLink exact to="/" className="nav-link" activeClassName="active">{t("home")}</NavLink>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <NavLink to="/webgl" className="nav-link" activeClassName="active">{t("webgl")}</NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/accessibility" className="nav-link" activeClassName="active">{t("accessibility")}</NavLink>
-          </li>
+          </li> */}
 
           {userContext.data.user && (
             <>
@@ -35,7 +35,7 @@ const Header = ({ handleLogout }: HeaderProps) => {
                 <NavLink exact to="/dashboard" className="nav-link" activeClassName="active">{t("dashboard")}</NavLink>
               </li>
               <li className="nav-item">
-                <span className="nav-link" onClick={handleLogout}>{t("logout")}</span>
+                <span className="nav-link" onClick={handleLogout}>{t("login.logout")}</span>
               </li>
             </>
           )}

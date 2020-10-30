@@ -14,7 +14,7 @@ const sketch = (p: p5) => {
   }
   p.draw = () => {
     p.background(31, 121, 150);
-    console.log((p.height - textSize))
+    // console.log((p.height - textSize))
     for (let i = 1; i <= text.length; i++)
       p.text(text.substring(i - 1, i), i * textSize, (p.height / 2) + wobble * (i % 2 ^ framecount));
     framecount = (framecount + 1) % 2;
