@@ -39,11 +39,18 @@ const RemoveButton = styled.button`
   padding: 0;
 `
 
-export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask }: TaskComponentProps) => {
+const TagEditElement = styled(FontAwesomeIcon)<{active: boolean}>`
+  margin-right: 10px;
+  cursor: pointer;
+  opacity: ${({active}) => active ? '1' : '0.5'};
+`
+
+export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskComponentProps) => {
 
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState(task.title)
   const [description, setDescription] = useState(task.description)
+  const [tag, setTag] = useState(task.tag)
 
   const handleCompleteTaskClick = useCallback(() => {
     handleUpdateTask({...task, isComplete: !task.isComplete})
@@ -55,8 +62,8 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask }: Task
 
   const handleApplyChanges = useCallback(() => {
     setEditMode(false)
-    handleUpdateTask({ ...task, title, description })
-  }, [handleUpdateTask, task, title, description])
+    handleUpdateTask({...task, title, description, tag})
+  }, [handleUpdateTask, task, title, description, tag])
 
   const handleCancelUpdate = useCallback(() => {
     setTitle(task.title)
@@ -81,6 +88,17 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask }: Task
     }, animRef.current as HTMLElement);
     return () => sketchRef.current?.remove();
   }, [task]);
+
+  const renderTag = (index: number) => {
+
+    const handleClick = () => {
+      setTag(tag === index ? -1 : index)
+    }
+
+    return (
+      <TagEditElement color={TagColor[index]} size="lg" icon={faTag} active={tag === index} onClick={handleClick}/>
+    )
+  }
 
   return (
     <li className="list-group-item d-flex">
@@ -122,11 +140,22 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask }: Task
         ) : (
             <p className="mb-1 text-muted">{description}</p>
           )}
-        {TagColor[task.tag] && (
           <small className="d-flex align-items-center mt-2">
-            <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag} />
+            {editMode ? (
+              <>
+                {renderTag(0)}
+                {renderTag(1)}
+                {renderTag(2)}
+                {renderTag(3)}
+              </>
+            ) : (
+              <>
+                {TagColor[task.tag] && (
+                  <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag}/>
+                )}
+              </>
+            )}
           </small>
-        )}
       </div>
       <div className="d-flex flex-column ml-5">
         {editMode ? (
