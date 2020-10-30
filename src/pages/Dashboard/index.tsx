@@ -19,7 +19,7 @@ export const DashboardPage = () => {
   if (loading === undefined) {
     return <h1>Something went wrong</h1>
   }
-
+  let keys = 0;
   return (
     <div className="container-fluid mt-5">
       <div className="row">
@@ -36,6 +36,7 @@ export const DashboardPage = () => {
                   task={task}
                   handleRemoveTask={removeTask}
                   handleUpdateTask={updateTask}
+                  key={keys++}
                 />
               ))}
             </ul>
