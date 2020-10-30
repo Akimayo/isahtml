@@ -79,12 +79,12 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
         p.createCanvas(48, 48, "webgl");
       }
       let startChangeTime: number = -2, lastIsComplete: boolean = Boolean(task.isComplete);
-      const SIZE_DURATION = 10, POP_DURATION = 40, POP_COUNT = 8;
+      const SIZE_DURATION = 10, POP_DURATION = 40, POP_COUNT = 12;
       p.draw = () => {
         const currentComplete = Boolean(task.isComplete);
         if (startChangeTime == -2) startChangeTime = p.frameCount;
         p.background(255);
-        p.pointLight(192, 192, 192, p.mouseX - 16, p.mouseY - 16, 16);
+        p.pointLight(192, 255, 192, p.mouseX - 16, p.mouseY - 16, 16);
         p.ambientLight(255);
         p.noStroke();
         if (startChangeTime >= 0) {
@@ -94,12 +94,12 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
             p.sphere(p.map(animFrames, 0, SIZE_DURATION, 12, 4));
           } else if (animFrames < SIZE_DURATION + POP_DURATION) {
             currentComplete ?
-            p.fill(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 192, 64), 192, p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 192, 80)) :
-            p.fill(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 64, 192), 192, p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 80, 192));
-            const mag = p.sin(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 0, p.PI)) + 1;
+              p.fill(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 192, 64), 192, p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 192, 80)) :
+              p.fill(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 64, 192), 192, p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 80, 192));
+            const mag = p.sin(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 0, p.PI));
             for (let i = 0; i < POP_COUNT; i++) {
               p.push();
-              p.translate(Vector.fromAngle(p.TWO_PI / POP_COUNT * i).setMag(8 * mag));
+              p.translate(Vector.fromAngle(p.TWO_PI / POP_COUNT * i).setMag(20 * mag));
               p.sphere(2);
               p.pop();
             }
