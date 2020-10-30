@@ -1,7 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import './App.scss';
-import {Route, Switch, useHistory} from "react-router";
+import { Route, Switch, useHistory } from "react-router";
 import { BrowserRouter } from 'react-router-dom';
 
 import HomePage from "./pages/Homepage";
@@ -11,8 +11,8 @@ import LoginPage from "./pages/Login";
 
 import Header from "./components/Header";
 import AuthService from "./services/Auth.service";
-import {UserContext, UserData} from './contexts/User.context';
-import {DashboardPage} from "./pages/Dashboard";
+import { UserContext, UserData } from './contexts/User.context';
+import { DashboardPage } from "./pages/Dashboard";
 
 const initialUserData = { user: null, isLoading: false }
 
@@ -50,7 +50,7 @@ function App() {
   }
 
   return (
-    <UserContext.Provider value={{data: userData, update: setUserData}}>
+    <UserContext.Provider value={{ data: userData, update: setUserData }}>
       <BrowserRouter>
         <Header handleLogout={handleLogout} />
 

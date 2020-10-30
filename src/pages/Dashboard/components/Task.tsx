@@ -1,8 +1,8 @@
-import React, {useCallback, useState} from 'react';
-import {Task} from "../../../entities/Task";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheckCircle, faCircle} from "@fortawesome/free-regular-svg-icons";
-import {TagColor} from "../../../entities/TagColor";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Task } from "../../../entities/Task";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons";
+import { TagColor } from "../../../entities/TagColor";
 import styled from "styled-components";
 import {
   faCheck,

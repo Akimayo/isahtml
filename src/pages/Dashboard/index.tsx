@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import useTasks from "../../hooks/useTasks"
-import {Task} from "../../entities/Task";
-import {AddTaskForm} from "./components/AddTaskForm";
-import {TaskComponent} from "./components/Task";
+import { Task } from "../../entities/Task";
+import { AddTaskForm } from "./components/AddTaskForm";
+import { TaskComponent } from "./components/Task";
+import { useTranslation } from 'react-i18next';
 
 export const DashboardPage = () => {
-  const {state, actions} = useTasks()
+  const { state, actions } = useTasks()
 
-  const {fetchTasks, createTask, removeTask, updateTask} = actions
-  const {loading, taskData, tasks} = state
+  const { fetchTasks, createTask, removeTask, updateTask } = actions
+  const { loading, taskData, tasks } = state
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchTasks()
