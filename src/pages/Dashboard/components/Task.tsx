@@ -11,7 +11,7 @@ import {
   faTimes,
   faTrash
 } from "@fortawesome/free-solid-svg-icons";
-import p5 from 'p5';
+import p5, { Vector } from 'p5';
 import './CompleteButton.scss';
 
 interface TaskComponentProps {
@@ -72,25 +72,49 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
     setEditMode(false)
   }, [task])
 
-  const animRef = React.createRef<HTMLLabelElement>(), sketchRef = useRef<p5>();
+  const animRef = React.createRef<HTMLLabelElement>();
   useEffect(() => {
-    sketchRef.current = new p5((p: p5) => {
+    const s = new p5((p: p5) => {
       p.setup = () => {
-        p.createCanvas(32, 32, "webgl");
+        p.createCanvas(48, 48, "webgl");
       }
-      let startChangeTime: number, lastIsComplete: boolean|undefined;
+      let startChangeTime: number = -2, lastIsComplete: boolean = Boolean(task.isComplete);
+      const SIZE_DURATION = 10, POP_DURATION = 40, POP_COUNT = 8;
       p.draw = () => {
-        if(task.isComplete != lastIsComplete) startChangeTime = p.frameCount;
+        const currentComplete = Boolean(task.isComplete);
+        if (startChangeTime == -2) startChangeTime = p.frameCount;
         p.background(255);
-        p.pointLight(192, 192, 192, p.mouseX-16, p.mouseY-16, 16);
+        p.pointLight(192, 192, 192, p.mouseX - 16, p.mouseY - 16, 16);
         p.ambientLight(255);
         p.noStroke();
-        task.isComplete ? p.ambientMaterial(64,192,80) : p.ambientMaterial(192);
-        p.sphere(12);
-        lastIsComplete = task.isComplete;
+        if (startChangeTime >= 0) {
+          const animFrames = p.frameCount - startChangeTime;
+          if (animFrames < SIZE_DURATION) {
+            currentComplete ? p.ambientMaterial(192) : p.ambientMaterial(64, 192, 80);
+            p.sphere(p.map(animFrames, 0, SIZE_DURATION, 12, 4));
+          } else if (animFrames < SIZE_DURATION + POP_DURATION) {
+            currentComplete ?
+            p.fill(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 192, 64), 192, p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 192, 80)) :
+            p.fill(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 64, 192), 192, p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 80, 192));
+            const mag = p.sin(p.map(animFrames, SIZE_DURATION, SIZE_DURATION + POP_DURATION, 0, p.PI)) + 1;
+            for (let i = 0; i < POP_COUNT; i++) {
+              p.push();
+              p.translate(Vector.fromAngle(p.TWO_PI / POP_COUNT * i).setMag(8 * mag));
+              p.sphere(2);
+              p.pop();
+            }
+          } else if (animFrames < POP_DURATION + 2 * SIZE_DURATION) {
+            currentComplete ? p.ambientMaterial(64, 192, 80) : p.ambientMaterial(192);
+            p.sphere(p.map(animFrames, SIZE_DURATION + POP_DURATION, POP_DURATION + 2 * SIZE_DURATION, 4, 12));
+          } else startChangeTime = -1;
+        } else {
+          currentComplete ? p.ambientMaterial(64, 192, 80) : p.ambientMaterial(192);
+          p.sphere(12);
+          lastIsComplete = currentComplete;
+        }
       }
     }, animRef.current as HTMLElement);
-    return () => sketchRef.current?.remove();
+    return () => s.remove();
   }, [task]);
 
   const renderTag = (index: number) => {
