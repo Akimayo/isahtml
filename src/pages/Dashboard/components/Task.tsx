@@ -16,7 +16,8 @@ import './CompleteButton.scss';
 
 interface TaskComponentProps {
   task: Task
-  handleUpdateTask: (task: Task) => void
+  index: number
+  handleUpdateTask: (task: Task, index: number) => void
   handleRemoveTask: (task: Task) => void
 }
 
@@ -39,13 +40,13 @@ const RemoveButton = styled.button`
   padding: 0;
 `
 
-const TagEditElement = styled(FontAwesomeIcon)<{active: boolean}>`
+const TagEditElement = styled(FontAwesomeIcon) <{ active: boolean }>`
   margin-right: 10px;
   cursor: pointer;
-  opacity: ${({active}) => active ? '1' : '0.5'};
+  opacity: ${({ active }) => active ? '1' : '0.5'};
 `
 
-export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskComponentProps) => {
+export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index }: TaskComponentProps) => {
 
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState(task.title)
@@ -53,8 +54,8 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
   const [tag, setTag] = useState(task.tag)
 
   const handleCompleteTaskClick = useCallback(() => {
-    handleUpdateTask({...task, isComplete: !task.isComplete})
-  }, [handleUpdateTask, task])
+    handleUpdateTask({ ...task, isComplete: !task.isComplete }, index)
+  }, [handleUpdateTask, task, index])
 
   const handleRemoveTaskClick = useCallback(() => {
     handleRemoveTask(task);
@@ -62,8 +63,8 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
 
   const handleApplyChanges = useCallback(() => {
     setEditMode(false)
-    handleUpdateTask({...task, title, description, tag})
-  }, [handleUpdateTask, task, title, description, tag])
+    handleUpdateTask({ ...task, title, description, tag }, index)
+  }, [handleUpdateTask, task, title, description, tag, index])
 
   const handleCancelUpdate = useCallback(() => {
     setTitle(task.title)
@@ -77,13 +78,16 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
       p.setup = () => {
         p.createCanvas(32, 32, "webgl");
       }
+      let startChangeTime: number, lastIsComplete: boolean|undefined;
       p.draw = () => {
+        if(task.isComplete != lastIsComplete) startChangeTime = p.frameCount;
         p.background(255);
         p.pointLight(192, 192, 192, p.mouseX-16, p.mouseY-16, 16);
         p.ambientLight(255);
         p.noStroke();
         task.isComplete ? p.ambientMaterial(64,192,80) : p.ambientMaterial(192);
         p.sphere(12);
+        lastIsComplete = task.isComplete;
       }
     }, animRef.current as HTMLElement);
     return () => sketchRef.current?.remove();
@@ -96,7 +100,7 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
     }
 
     return (
-      <TagEditElement color={TagColor[index]} size="lg" icon={faTag} active={tag === index} onClick={handleClick}/>
+      <TagEditElement color={TagColor[index]} size="lg" icon={faTag} active={tag === index} onClick={handleClick} />
     )
   }
 
@@ -140,22 +144,22 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
         ) : (
             <p className="mb-1 text-muted">{description}</p>
           )}
-          <small className="d-flex align-items-center mt-2">
-            {editMode ? (
-              <>
-                {renderTag(0)}
-                {renderTag(1)}
-                {renderTag(2)}
-                {renderTag(3)}
-              </>
-            ) : (
+        <small className="d-flex align-items-center mt-2">
+          {editMode ? (
+            <>
+              {renderTag(0)}
+              {renderTag(1)}
+              {renderTag(2)}
+              {renderTag(3)}
+            </>
+          ) : (
               <>
                 {TagColor[task.tag] && (
-                  <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag}/>
+                  <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag} />
                 )}
               </>
             )}
-          </small>
+        </small>
       </div>
       <div className="d-flex flex-column ml-5">
         {editMode ? (

@@ -19,7 +19,6 @@ export const DashboardPage = () => {
   if (loading === undefined) {
     return <h1>Something went wrong</h1>
   }
-  let keys = 0;
   return (
     <div className="container-fluid mt-5">
       <div className="row">
@@ -31,12 +30,13 @@ export const DashboardPage = () => {
           <h1 className="display-4">{t("task.headers.tasks")}</h1>
           {loading ? (<h1>Loading...</h1>) : (
             <ul className="list-group list-group-flush">
-              {tasks?.map((task: Task) => (
+              {tasks?.map((task: Task, i: number) => (
                 <TaskComponent
                   task={task}
                   handleRemoveTask={removeTask}
                   handleUpdateTask={updateTask}
-                  key={keys++}
+                  index={i}
+                  key={i}
                 />
               ))}
             </ul>

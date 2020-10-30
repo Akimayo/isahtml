@@ -45,14 +45,14 @@ const useTasks = () => {
     }
   }, [fetchTasks])
 
-  const updateTask = useCallback(async (task: Task) => {
+  const updateTask = useCallback(async (task: Task, index: number) => {
     try {
       await TaskService.update(task)
-      await fetchTasks()
+      tasks && setTasks([...tasks.slice(0, index),task,...tasks.slice(index+1)])
     } catch (e) {
       console.error(e)
     }
-  }, [fetchTasks])
+  }, [fetchTasks, tasks])
 
   return {
     state: {
