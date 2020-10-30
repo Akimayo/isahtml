@@ -5,10 +5,22 @@
   "accessibility": "Přístupnost",
   "login": {
     "login": "Přihlášení",
+    "logout": "Odhlásti se",
     "form": {
       "identity": "E-mail nebo uživatelské jméno",
       "password": "Heslo",
       "submit": "Přihlásit se"
+    }
+  },
+  "task": {
+    "form": {
+      "title": "Název",
+      "description": "Popis",
+      "submit": "Vytvořit úkol"
+    },
+    "headers": {
+      "add": "Nový úkol",
+      "tasks": "Úkoly"
     }
   },
   "dashboard": "Seznam úkolů"

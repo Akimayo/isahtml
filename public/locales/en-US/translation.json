@@ -4,11 +4,23 @@
   "webgl": "WebGL Showcase",
   "accessibility": "Web Accessibility",
   "login": {
-    "login": "Login",
+    "login": "Log In",
+    "logout": "Log Out",
     "form": {
       "identity": "Email or Username",
       "password": "Password",
       "submit": "Login"
+    }
+  },
+  "task": {
+    "form": {
+      "title": "Title",
+      "description": "Description",
+      "submit": "Add Task"
+    },
+    "headers": {
+      "add": "Add task",
+      "tasks": "Tasks"
     }
   },
   "dashboard": "Task List"

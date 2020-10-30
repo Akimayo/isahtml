@@ -23,7 +23,7 @@ export const AddTaskForm = ({handleCreateTask}: AddTaskFormProps) => {
       {({values, handleBlur, handleSubmit, isSubmitting, handleChange}) => (
         <form className="" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="title">{t('add.task.form.title')}</label>
+            <label htmlFor="title">{t('task.form.title')}</label>
             <input
               type="text"
               id="title"
@@ -36,7 +36,7 @@ export const AddTaskForm = ({handleCreateTask}: AddTaskFormProps) => {
           </div>
           <div className="form-group">
             <label
-              htmlFor="description">{t('add.task.form.description')}</label>
+              htmlFor="description">{t('task.form.description')}</label>
             <input
               type="text"
               name="description"
@@ -49,7 +49,7 @@ export const AddTaskForm = ({handleCreateTask}: AddTaskFormProps) => {
           </div>
           <button type="submit" className="btn btn-primary float-right"
                   disabled={isSubmitting}>
-            {t('add.task.form.submit')}
+            {t('task.form.submit')}
           </button>
         </form>
       )}
