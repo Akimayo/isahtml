@@ -82,8 +82,8 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
             />
           </div>
         ) : (
-          <h5 className="mb-1">{title}</h5>
-        )}
+            <h5 className="mb-1">{title}</h5>
+          )}
         {editMode ? (
           <div className="input-group input-group-sm mt-1">
             <input
@@ -96,11 +96,11 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
             />
           </div>
         ) : (
-          <p className="mb-1 text-muted">{description}</p>
-        )}
+            <p className="mb-1 text-muted">{description}</p>
+          )}
         {TagColor[task.tag] && (
           <small className="d-flex align-items-center mt-2">
-            <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag}/>
+            <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag} />
           </small>
         )}
       </div>
@@ -108,19 +108,19 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
         {editMode ? (
           <div className="d-flex">
             <Button className="mr-2" onClick={handleApplyChanges}>
-              <FontAwesomeIcon color="green" icon={faCheck}/>
+              <FontAwesomeIcon color="green" icon={faCheck} />
             </Button>
             <Button onClick={handleCancelUpdate}>
-              <FontAwesomeIcon color="red" icon={faTimes}/>
+              <FontAwesomeIcon color="red" icon={faTimes} />
             </Button>
           </div>
         ) : (
-          <Button onClick={() => setEditMode(!editMode)}>
-            <FontAwesomeIcon color="gray" size="sm" icon={faEdit}/>
-          </Button>
-        )}
+            <Button onClick={() => setEditMode(!editMode)}>
+              <FontAwesomeIcon color="gray" size="sm" icon={faEdit} />
+            </Button>
+          )}
         <RemoveButton onClick={handleRemoveTaskClick}>
-          <FontAwesomeIcon color="red" size="sm" icon={faTrash}/>
+          <FontAwesomeIcon color="red" size="sm" icon={faTrash} />
         </RemoveButton>
       </div>
     </li>
