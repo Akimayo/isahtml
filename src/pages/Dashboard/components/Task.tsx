@@ -11,6 +11,8 @@ import {
   faTimes,
   faTrash
 } from "@fortawesome/free-solid-svg-icons";
+import p5 from 'p5';
+import './CompleteButton.scss';
 
 interface TaskComponentProps {
   task: Task
@@ -37,7 +39,7 @@ const RemoveButton = styled.button`
   padding: 0;
 `
 
-export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskComponentProps) => {
+export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask }: TaskComponentProps) => {
 
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState(task.title)
@@ -53,7 +55,7 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
 
   const handleApplyChanges = useCallback(() => {
     setEditMode(false)
-    handleUpdateTask({...task, title, description})
+    handleUpdateTask({ ...task, title, description })
   }, [handleUpdateTask, task, title, description])
 
   const handleCancelUpdate = useCallback(() => {
@@ -62,13 +64,35 @@ export const TaskComponent = ({task, handleUpdateTask, handleRemoveTask}: TaskCo
     setEditMode(false)
   }, [task])
 
+  const animRef = React.createRef<HTMLLabelElement>(), sketchRef = useRef<p5>();
+  useEffect(() => {
+    sketchRef.current = new p5((p: p5) => {
+      p.setup = () => {
+        p.createCanvas(32, 32, "webgl");
+      }
+      p.draw = () => {
+        p.background(255);
+        p.pointLight(192, 192, 192, p.mouseX-16, p.mouseY-16, 16);
+        p.ambientLight(255);
+        p.noStroke();
+        task.isComplete ? p.ambientMaterial(64,192,80) : p.ambientMaterial(192);
+        p.sphere(12);
+      }
+    }, animRef.current as HTMLElement);
+    return () => sketchRef.current?.remove();
+  }, [task]);
+
   return (
     <li className="list-group-item d-flex">
-      <CompleteButton onClick={handleCompleteTaskClick}>
+      <input type="checkbox" id={"completed-" + task.id} checked={task.isComplete} hidden />
+      <label htmlFor={"#completed-" + task.id} className={"complete-button" + (task.isComplete ? " is-completed" : "")} ref={animRef} onClick={handleCompleteTaskClick}>
+        <FontAwesomeIcon color={task.isComplete ? "green" : "lightgray"} size="2x" icon={faCheckCircle} />
+      </label>
+      {/* <CompleteButton onClick={handleCompleteTaskClick}>
         {task.isComplete ?
-          <FontAwesomeIcon color="green" size="2x" icon={faCheckCircle}/> :
-          <FontAwesomeIcon color="lightgray" size="2x" icon={faCircle}/>}
-      </CompleteButton>
+          <FontAwesomeIcon color="green" size="2x" icon={faCheckCircle} /> :
+          <FontAwesomeIcon color="lightgray" size="2x" icon={faCircle} />}
+      </CompleteButton> */}
       <div className="d-flex flex-column flex-grow-1 align-items-start">
         {editMode ? (
           <div className="input-group input-group-sm">

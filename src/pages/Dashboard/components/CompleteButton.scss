@@ -1,0 +1,24 @@
+.complete-button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  canvas, svg {
+    position: absolute;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+  }
+  svg {
+    z-index: 2;
+    left: 2px;
+    top: 2px;
+    opacity: 0;
+    transition-duration: .24s;
+    will-change: opacity;
+  }
+  &:hover svg, &.is-completed svg {
+    opacity: 1;
+  }
+}
