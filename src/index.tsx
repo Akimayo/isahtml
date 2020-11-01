@@ -5,10 +5,11 @@ import App from './App';
 import './libs/bootstrap/bootstrap';
 import './libs/i18next';
 import './index.scss';
+import { Progress } from './components/Progress';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={<div className="spinner-border ml-2" />}>
+    <Suspense fallback={<Progress />}>
       <App />
     </Suspense>
   </React.StrictMode>,

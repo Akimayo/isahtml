@@ -3,6 +3,7 @@ import useTasks from "../../hooks/useTasks"
 import { Task } from "../../entities/Task";
 import { AddTaskForm } from "./components/AddTaskForm";
 import { TaskComponent } from "./components/Task";
+import { Progress } from "../../components/Progress";
 import { useTranslation } from 'react-i18next';
 
 import './ModalBackdrop.scss';
@@ -45,7 +46,7 @@ export const DashboardPage = () => {
           </aside>
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <h1 className="display-4">{t("task.headers.tasks")}</h1>
-            {loading ? (<h1>Loading...</h1>) : (
+            {loading ? (<Progress />) : (
               <ul className="list-group list-group-flush">
                 {tasks?.map((task: Task, i: number) => (
                   <TaskComponent

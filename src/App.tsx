@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import AuthService from "./services/Auth.service";
 import { UserContext, UserData } from './contexts/User.context';
 import { DashboardPage } from "./pages/Dashboard";
+import { Progress } from './components/Progress';
 
 const initialUserData = { user: null, isLoading: false }
 
@@ -46,7 +47,7 @@ function App() {
   }, [])
 
   if (userData.isLoading) {
-    return <h1>Loading ...</h1>
+    return <Progress />
   }
 
   return (
