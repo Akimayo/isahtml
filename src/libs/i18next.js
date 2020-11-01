@@ -4,12 +4,12 @@ import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n.use(Backend)
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .init({
-        fallbackLng: ['cs-CZ', 'en-US'],
-        debug: true,
-        supportedLngs: ['en-US', 'cs-CZ'],
-        interpolation: { escapeValue: false }
-    });
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: ['cs-CZ', 'en-US'],
+    debug: true,
+    supportedLngs: ['en-US', 'cs-CZ'],
+    interpolation: { escapeValue: false }
+  });
 export default i18n;

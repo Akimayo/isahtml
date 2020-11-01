@@ -12,12 +12,12 @@ export const DashboardPage = () => {
   const { state, actions } = useTasks()
 
   const { fetchTasks, createTask, removeTask, updateTask } = actions
-  const { loading, taskData, tasks } = state
+  const { loading, tasks } = state
   const { t } = useTranslation();
 
   useEffect(() => {
     fetchTasks()
-  }, [])
+  }, [fetchTasks])
 
   if (loading === undefined) {
     return <h1>Something went wrong</h1>

@@ -1,12 +1,12 @@
 import axios from 'axios'
-import {BaseTask, Task} from "../entities/Task";
+import { BaseTask, Task } from "../entities/Task";
 import {
   TaskCreateResponse,
   TaskDeleteResponse,
   TaskGetResponse,
   TaskUpdateResponse
 } from "./Task.types";
-import {API_PATH_PREFIX} from "../constants";
+import { API_PATH_PREFIX } from "../constants";
 
 class TaskService {
   static async create(task: BaseTask) {

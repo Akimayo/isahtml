@@ -5,8 +5,6 @@ import { Route, Switch, useHistory } from "react-router";
 import { BrowserRouter } from 'react-router-dom';
 
 import HomePage from "./pages/Homepage";
-import AnimationsPage from "./pages/Animations";
-import AccessibilityPage from './pages/Accessibility';
 import LoginPage from "./pages/Login";
 
 import Header from "./components/Header";
@@ -44,7 +42,7 @@ function App() {
     } catch (e) {
       console.error(e)
     }
-  }, [])
+  }, [history])
 
   if (userData.isLoading) {
     return <Progress />
@@ -57,8 +55,6 @@ function App() {
 
         <Switch>
           <Route exact path={'/'} component={HomePage} />
-          <Route path={'/webgl'} component={AnimationsPage} />
-          <Route path={'/accessibility'} component={AccessibilityPage} />
           {!userData.user && (
             <>
               <Route path={'/login'} component={LoginPage} />

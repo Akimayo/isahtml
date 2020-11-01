@@ -1,4 +1,4 @@
-import {Task} from "../entities/Task";
+import { Task } from "../entities/Task";
 
 interface TaskBaseResponse {
   id: string
@@ -7,11 +7,11 @@ interface TaskBaseResponse {
   isComplete: boolean
 }
 
-export interface TaskCreateResponse extends TaskBaseResponse {}
+export interface TaskCreateResponse extends TaskBaseResponse { }
 
-export interface TaskUpdateResponse extends TaskBaseResponse {}
+export interface TaskUpdateResponse extends TaskBaseResponse { }
 
-export interface TaskDeleteResponse {}
+export interface TaskDeleteResponse { }
 
 export interface TaskGetResponse {
   entities: Array<Task>

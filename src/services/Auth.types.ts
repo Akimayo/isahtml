@@ -1,4 +1,4 @@
-import {User} from "../entities/User";
+import { User } from "../entities/User";
 
 export interface LoginResponse {
   id: string
@@ -7,8 +7,8 @@ export interface LoginResponse {
   fullName: string
 }
 
-export interface RegisterResponse {}
+export interface RegisterResponse { }
 
-export interface DeleteResponse {}
+export interface DeleteResponse { }
 
-export interface GetCurrentUserResponse extends User {}
+export interface GetCurrentUserResponse extends User { }

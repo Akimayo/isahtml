@@ -1,5 +1,5 @@
 import React from "react";
-import {User} from "../entities/User";
+import { User } from "../entities/User";
 
 export interface UserData {
   user: User | null
@@ -16,7 +16,7 @@ const initialContextData = {
     user: null,
     isLoading: false
   },
-  update: () => {}
+  update: () => { }
 }
 
 export const UserContext = React.createContext<UserContextData>(initialContextData)

@@ -1,5 +1,5 @@
-import {useCallback, useState} from "react";
-import {BaseTask, Task} from "../entities/Task";
+import { useCallback, useState } from "react";
+import { BaseTask, Task } from "../entities/Task";
 import TaskService from "../services/Task.service";
 
 export interface TaskData {
@@ -48,11 +48,11 @@ const useTasks = () => {
   const updateTask = useCallback(async (task: Task, index: number) => {
     try {
       await TaskService.update(task)
-      tasks && setTasks([...tasks.slice(0, index),task,...tasks.slice(index+1)])
+      tasks && setTasks([...tasks.slice(0, index), task, ...tasks.slice(index + 1)])
     } catch (e) {
       console.error(e)
     }
-  }, [fetchTasks, tasks])
+  }, [tasks])
 
   return {
     state: {

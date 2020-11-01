@@ -22,12 +22,6 @@ const Header = ({ handleLogout }: HeaderProps) => {
           <li className="nav-item">
             <NavLink exact to="/" className="nav-link" activeClassName="active">{t("home")}</NavLink>
           </li>
-          {/* <li className="nav-item">
-            <NavLink to="/webgl" className="nav-link" activeClassName="active">{t("webgl")}</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/accessibility" className="nav-link" activeClassName="active">{t("accessibility")}</NavLink>
-          </li> */}
 
           {userContext.data.user && (
             <>

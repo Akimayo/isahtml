@@ -1,4 +1,4 @@
-import {TagColor} from "./TagColor";
+import { TagColor } from "./TagColor";
 
 export interface BaseTask {
   title: string

@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Task } from "../../../entities/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { TagColor } from "../../../entities/TagColor";
 import styled from "styled-components";
 import {
@@ -20,13 +20,6 @@ interface TaskComponentProps {
   handleUpdateTask: (task: Task, index: number) => void
   handleRemoveTask: (task: Task) => void
 }
-
-const CompleteButton = styled.button`
-  border: 0;
-  background: 0;
-  padding: 0;
-  margin-right: 10px;
-`
 
 const Button = styled.button`
   border: 0;
@@ -78,11 +71,11 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
       p.setup = () => {
         p.createCanvas(48, 48, "webgl");
       }
-      let startChangeTime: number = -2, lastIsComplete: boolean = Boolean(task.isComplete);
+      let startChangeTime: number = -2;
       const SIZE_DURATION = 10, POP_DURATION = 40, POP_COUNT = 12;
       p.draw = () => {
         const currentComplete = Boolean(task.isComplete);
-        if (startChangeTime == -2) startChangeTime = p.frameCount;
+        if (startChangeTime === -2) startChangeTime = p.frameCount;
         p.background(255);
         p.pointLight(192, 255, 192, p.mouseX - 16, p.mouseY - 16, 16);
         p.ambientLight(255);
@@ -110,12 +103,11 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
         } else {
           currentComplete ? p.ambientMaterial(64, 192, 80) : p.ambientMaterial(192);
           p.sphere(12);
-          lastIsComplete = currentComplete;
         }
       }
     }, animRef.current as HTMLElement);
     return () => s.remove();
-  }, [task]);
+  }, [task, animRef]);
 
   const renderTag = (index: number) => {
 

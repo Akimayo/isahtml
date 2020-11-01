@@ -1,7 +1,7 @@
 import React from 'react'
-import {Formik} from "formik";
-import {BaseTask} from "../../../entities/Task";
-import {useTranslation} from 'react-i18next';
+import { Formik } from "formik";
+import { BaseTask } from "../../../entities/Task";
+import { useTranslation } from 'react-i18next';
 
 interface AddTaskFormProps {
   handleCreateTask: (task: BaseTask) => Promise<void>
@@ -14,13 +14,13 @@ const initialFormData = {
   isComplete: false
 }
 
-export const AddTaskForm = ({handleCreateTask}: AddTaskFormProps) => {
-  const {t} = useTranslation()
+export const AddTaskForm = ({ handleCreateTask }: AddTaskFormProps) => {
+  const { t } = useTranslation()
 
   return (
     <Formik<BaseTask> onSubmit={handleCreateTask}
-                      initialValues={initialFormData}>
-      {({values, handleBlur, handleSubmit, isSubmitting, handleChange}) => (
+      initialValues={initialFormData}>
+      {({ values, handleBlur, handleSubmit, isSubmitting, handleChange }) => (
         <form className="" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">{t('task.form.title')}</label>
@@ -48,7 +48,7 @@ export const AddTaskForm = ({handleCreateTask}: AddTaskFormProps) => {
             />
           </div>
           <button type="submit" className="btn btn-primary float-right"
-                  disabled={isSubmitting}>
+            disabled={isSubmitting}>
             {t('task.form.submit')}
           </button>
         </form>
