@@ -72,12 +72,12 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
         p.createCanvas(48, 48, "webgl");
       }
       let startChangeTime: number = -2;
-      const SIZE_DURATION = 10, POP_DURATION = 40, POP_COUNT = 12;
+      const SIZE_DURATION = 10, POP_DURATION = 40, POP_COUNT = 12, MOUSE_OFFSET = 24;
       p.draw = () => {
         const currentComplete = Boolean(task.isComplete);
         if (startChangeTime === -2) startChangeTime = p.frameCount;
         p.background(255);
-        p.pointLight(192, 255, 192, p.mouseX - 16, p.mouseY - 16, 16);
+        p.pointLight(192, 255, 192, p.mouseX - MOUSE_OFFSET, p.mouseY - MOUSE_OFFSET, 16);
         p.ambientLight(255);
         p.noStroke();
         if (startChangeTime >= 0) {
@@ -107,7 +107,8 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
       }
     }, animRef.current as HTMLElement);
     return () => s.remove();
-  }, [task, animRef]);
+  // eslint-disable-next-line
+  }, [task]);
 
   const renderTag = (index: number) => {
 
