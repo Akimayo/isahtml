@@ -2,6 +2,7 @@
   "appName": "App Name Here",
   "home": "Home",
   "webgl": "WebGL Showcase",
+  "toggleNavbar": "Toggle Navigation",
   "accessibility": "Web Accessibility",
   "login": {
     "login": "Log In",
@@ -17,6 +18,10 @@
       "title": "Title",
       "description": "Description",
       "submit": "Add Task"
+    },
+    "dialog": {
+      "open": "Add task",
+      "close": "Cancel adding"
     },
     "headers": {
       "add": "Add task",

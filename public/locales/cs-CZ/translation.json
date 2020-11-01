@@ -2,6 +2,7 @@
   "appName": "Název aplikace",
   "home": "Domů",
   "webgl": "Ukázka WebGL",
+  "toggleNavbar": "Zobazit/Skrýt navigaci",
   "accessibility": "Přístupnost",
   "login": {
     "login": "Přihlášení",
@@ -17,6 +18,10 @@
       "title": "Název",
       "description": "Popis",
       "submit": "Vytvořit úkol"
+    },
+    "dialog": {
+      "open": "Přidat úkol",
+      "close": "Zrušit přidávání"
     },
     "headers": {
       "add": "Nový úkol",

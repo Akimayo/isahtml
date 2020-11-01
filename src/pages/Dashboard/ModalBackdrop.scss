@@ -1,0 +1,11 @@
+dialog.modal {
+  border: none;
+  background-color: #eee8;
+  & ~ .container, & ~ .container-fluid {
+    will-change: filter;
+    transition-duration: .24s;
+  }
+  &.show ~ .container, &.show ~ .container-fluid {
+    filter: blur(2px);
+  }
+}
