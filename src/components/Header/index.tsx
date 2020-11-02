@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from "react-router-dom";
 import styled from 'styled-components';
 import { UserContext } from "../../contexts/User.context";
+import {LogoComponent} from "../Logo";
 
 interface HeaderProps {
   handleLogout: () => void
@@ -18,7 +19,9 @@ const Header = ({ handleLogout }: HeaderProps) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/" className="navbar-brand">{t("appName")}</Link>
+      <Link to="/" className="navbar-brand">
+        <LogoComponent />
+      </Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label={t("toggleNavbar")}>
         <span className="navbar-toggler-icon" />
       </button>
