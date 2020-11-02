@@ -24,11 +24,11 @@ export const DashboardPage = () => {
   }
   return (
     <>
-      <dialog className="modal fade" data-backdrop="false" id="addTaskDialog">
+      <dialog className="modal fade" data-backdrop="false" id="addTaskDialog" tabIndex={0} aria-labelledby="addTaskDialogHeading">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h3 className="modal-title">{t("task.headers.add")}</h3>
+              <h3 className="modal-title" id="addTaskDialogHeading">{t("task.headers.add")}</h3>
               <button className="close" data-dismiss="modal" aria-label={t("task.dialog.close")}>
                 <span aria-hidden="true">&times;</span>
               </button>

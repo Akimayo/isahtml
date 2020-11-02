@@ -13,6 +13,12 @@
       "submit": "Login"
     }
   },
+  "color": {
+    "0": "red",
+    "1": "green",
+    "2": "blue",
+    "3": "orange"
+  },
   "task": {
     "form": {
       "title": "Title",
@@ -26,7 +32,19 @@
     "headers": {
       "add": "Add task",
       "tasks": "Tasks"
-    }
+    },
+    "tag": {
+      "apply": "Set {{ color }} tag",
+      "remove": "Remove {{ color }} tag"
+    },
+    "complete": "Complete",
+    "reopen": "Reopen",
+    "edit": "Edit",
+    "remove": "Remove",
+    "apply": "Apply changes",
+    "revert": "Revert changes",
+    "completed": "Completed",
+    "not-completed": "Not Completed"
   },
   "dashboard": "Task List"
 }

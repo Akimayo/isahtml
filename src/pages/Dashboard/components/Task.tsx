@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import p5, { Vector } from 'p5';
 import './CompleteButton.scss';
+import { useTranslation } from 'react-i18next';
 
 interface TaskComponentProps {
   task: Task
@@ -65,11 +66,13 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
     setEditMode(false)
   }, [task])
 
+  const { t } = useTranslation();
+
   const animRef = React.createRef<HTMLLabelElement>();
   useEffect(() => {
     const s = new p5((p: p5) => {
       p.setup = () => {
-        p.createCanvas(48, 48, "webgl");
+        p.createCanvas(48, 48, "webgl").attribute("aria-label", task.isComplete ? t("task.completed") : t("task.not-completed"));
       }
       let startChangeTime: number = -2;
       const SIZE_DURATION = 10, POP_DURATION = 40, POP_COUNT = 12, MOUSE_OFFSET = 24;
@@ -107,7 +110,7 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
       }
     }, animRef.current as HTMLElement);
     return () => s.remove();
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [task]);
 
   const renderTag = (index: number) => {
@@ -117,49 +120,48 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
     }
 
     return (
-      <TagEditElement color={TagColor[index]} size="lg" icon={faTag} active={tag === index} onClick={handleClick} />
+      <Button onClick={handleClick} aria-label={tag === index ? t("task.tag.apply", t("color." + tag)) : t("task.tag.remove", t("color." + tag))}>
+        <TagEditElement color={TagColor[index]} size="lg" icon={faTag} active={tag === index} />
+      </Button>
     )
   }
 
   return (
-    <li className="list-group-item d-flex">
-      <input type="checkbox" id={"completed-" + task.id} checked={task.isComplete} hidden />
-      <label htmlFor={"#completed-" + task.id} className={"complete-button" + (task.isComplete ? " is-completed" : "")} ref={animRef} onClick={handleCompleteTaskClick}>
+    <li className="list-group-item d-flex" itemScope>
+      <label htmlFor={"completed-" + task.id} className={"complete-button" + (task.isComplete ? " is-completed" : "")} ref={animRef} aria-label={task.isComplete ? t("task.reopen") : t("task.complete")} tabIndex={-1}>
+        <input type="checkbox" id={"completed-" + task.id} checked={task.isComplete} itemProp="completed" onChange={handleCompleteTaskClick} tabIndex={0} />
         <FontAwesomeIcon color={task.isComplete ? "green" : "lightgray"} size="2x" icon={faCheckCircle} />
       </label>
-      {/* <CompleteButton onClick={handleCompleteTaskClick}>
-        {task.isComplete ?
-          <FontAwesomeIcon color="green" size="2x" icon={faCheckCircle} /> :
-          <FontAwesomeIcon color="lightgray" size="2x" icon={faCircle} />}
-      </CompleteButton> */}
       <div className="d-flex flex-column flex-grow-1 align-items-start">
         {editMode ? (
-          <div className="input-group input-group-sm">
+          <div className="form-group form-group-sm">
+            <label htmlFor={"edit-title-" + task.id}>{t("task.form.title")}</label>
             <input
               value={title}
               onChange={(event) => setTitle(event.target.value)}
               type="text"
               className="form-control"
-              aria-label="title"
-              aria-describedby="inputGroup-sizing-sm"
+              name="title"
+              id={"edit-title-" + task.id}
             />
           </div>
         ) : (
-            <h5 className="mb-1">{title}</h5>
+            <h5 className="mb-1" itemProp="name">{title}</h5>
           )}
         {editMode ? (
-          <div className="input-group input-group-sm mt-1">
+          <div className="form-group form-group-sm mt-1">
+            <label htmlFor={"edit-description-" + task.id}>{t("task.form.description")}</label>
             <input
               value={description}
               onChange={(event) => setDescription(event.target.value)}
               type="text"
               className="form-control"
-              aria-label="title"
-              aria-describedby="inputGroup-sizing-sm"
+              name="description"
+              id={"edit-description-" + task.id}
             />
           </div>
         ) : (
-            <p className="mb-1 text-muted">{description}</p>
+            <p className="mb-1 text-muted" itemProp="about">{description}</p>
           )}
         <small className="d-flex align-items-center mt-2">
           {editMode ? (
@@ -172,7 +174,7 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
           ) : (
               <>
                 {TagColor[task.tag] && (
-                  <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag} />
+                  <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag} aria-label={tag === index ? t("task.tag.apply", { color: t("color." + tag) }) : t("task.tag.remove", { color: t("color." + tag) })} />
                 )}
               </>
             )}
@@ -181,19 +183,19 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
       <div className="d-flex flex-column ml-5">
         {editMode ? (
           <div className="d-flex">
-            <Button className="mr-2" onClick={handleApplyChanges}>
+            <Button className="mr-2" onClick={handleApplyChanges} aria-label={t("task.apply")} title={t("task.apply")}>
               <FontAwesomeIcon color="green" icon={faCheck} />
             </Button>
-            <Button onClick={handleCancelUpdate}>
+            <Button onClick={handleCancelUpdate} aria-label={t("task.revert")} title={t("task.revert")}>
               <FontAwesomeIcon color="red" icon={faTimes} />
             </Button>
           </div>
         ) : (
-            <Button onClick={() => setEditMode(!editMode)}>
+            <Button onClick={() => setEditMode(!editMode)} aria-label={t("task.edit")} title={t("task.edit")}>
               <FontAwesomeIcon color="gray" size="sm" icon={faEdit} />
             </Button>
           )}
-        <RemoveButton onClick={handleRemoveTaskClick}>
+        <RemoveButton onClick={handleRemoveTaskClick} aria-label={t("task.remove")} title={t("task.remove")}>
           <FontAwesomeIcon color="red" size="sm" icon={faTrash} />
         </RemoveButton>
       </div>

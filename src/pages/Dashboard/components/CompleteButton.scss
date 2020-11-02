@@ -14,14 +14,20 @@
     top: 10px;
     opacity: 0;
     transition-duration: 0.24s;
-    transition-delay: 0.6s;
     will-change: opacity;
   }
-  &:hover:not(.is-completed) svg {
-    transition-delay: 0;
+  &.is-completed svg {
+    transition-delay: 0.6s;
   }
   &:hover svg,
-  &.is-completed svg {
+  &.is-completed svg,
+  input[type="checkbox"]:focus + svg {
     opacity: 1;
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    opacity: 0;
   }
 }
