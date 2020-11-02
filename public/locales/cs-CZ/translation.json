@@ -6,7 +6,7 @@
   "accessibility": "Přístupnost",
   "login": {
     "login": "Přihlášení",
-    "logout": "Odhlásti se",
+    "logout": "Odhlásit se",
     "form": {
       "identity": "E-mail nebo uživatelské jméno",
       "password": "Heslo",
