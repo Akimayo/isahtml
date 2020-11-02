@@ -2,7 +2,8 @@ import React from 'react'
 import styled from "styled-components";
 
 const SvgElement = styled.svg`
-    width: 100%;
+    width: 300px;
+    height: 96px;
 
     .filled-heading {
         text-transform: uppercase;
