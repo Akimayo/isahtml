@@ -1,4 +1,5 @@
 import React from 'react'
+import Showcase from '../../Showcase'
 
 interface HomePageProps {
 
@@ -6,9 +7,7 @@ interface HomePageProps {
 
 const HomePage = (props: HomePageProps) => {
   return (
-    <div>
-      Some shit in homepage
-    </div>
+    <Showcase />
   )
 }
 

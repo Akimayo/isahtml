@@ -26,7 +26,7 @@ const SvgElement = styled.svg`
 
 export const LogoComponent = () => {
   return (
-    <SvgElement viewBox="0 0 700 225">
+    <SvgElement viewBox="0 0 700 225" aria-labelledby="homeLogoLink">
       <clipPath id="textClip" className="filled-heading">
         <text y="150">ISA PROJECT</text>
       </clipPath>

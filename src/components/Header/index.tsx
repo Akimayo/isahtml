@@ -19,7 +19,7 @@ const Header = ({ handleLogout }: HeaderProps) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/" className="navbar-brand">
+      <Link to="/" className="navbar-brand" aria-label={t("appName")} id="homeLogoLink">
         <LogoComponent />
       </Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label={t("toggleNavbar")}>

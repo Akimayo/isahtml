@@ -13,12 +13,14 @@ import { UserContext, UserData } from './contexts/User.context';
 import { DashboardPage } from "./pages/Dashboard";
 import { Progress } from './components/Progress';
 import RegisterPage from "./pages/Register";
+import { useTranslation } from 'react-i18next';
 
 const initialUserData = { user: null, isLoading: false }
 
 function App() {
   const history = useHistory()
   const [userData, setUserData] = useState<UserData>(initialUserData)
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -33,6 +35,7 @@ function App() {
     }
 
     handleLogin()
+    window.document.title = t("appName");
   }, [])
 
   const handleLogout = useCallback(async () => {

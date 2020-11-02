@@ -7,8 +7,8 @@ import webgl from './showcaseWebGL';
 function Showcase() {
   return (
     <div className="container">
-      <Animation sketch={sketch} />
-      <Animation sketch={webgl} />
+      {/* <Animation sketch={sketch} />
+      <Animation sketch={webgl} /> */}
       <h1>This is a h1</h1>
       <h2>This is a h2</h2>
       <h3>This is a h3</h3>
@@ -122,14 +122,6 @@ function Showcase() {
               <label htmlFor="exampleInputPassword1">Password</label>
               <input type="password" className="form-control" id="exampleInputPassword1"
                 placeholder="Password"></input>
-            </div>
-            <div className="form-group">
-              <label>Are you gay?</label>
-              <select className="custom-select">
-                <option>Yes</option>
-                <option>No</option>
-                <option>Maybe</option>
-              </select>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
