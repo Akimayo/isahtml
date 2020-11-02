@@ -35,7 +35,8 @@
     },
     "tag": {
       "apply": "Set {{ color }} tag",
-      "remove": "Remove {{ color }} tag"
+      "remove": "Remove {{ color }} tag",
+      "has": "{{ color }} tag"
     },
     "complete": "Complete",
     "reopen": "Reopen",

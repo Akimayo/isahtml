@@ -13,6 +13,12 @@
       "submit": "Přihlásit se"
     }
   },
+  "color": {
+    "0": "červená",
+    "1": "zelená",
+    "2": "modrá",
+    "3": "oranžová"
+  },
   "task": {
     "form": {
       "title": "Název",
@@ -26,7 +32,20 @@
     "headers": {
       "add": "Nový úkol",
       "tasks": "Úkoly"
-    }
+    },
+    "tag": {
+      "apply": "Nastavit značku {{ color }}",
+      "remove": "Odebrat značku{{ color }}",
+      "has": "{{ color }} značka"
+    },
+    "complete": "Dokončit",
+    "reopen": "Otevřít",
+    "edit": "Upravit",
+    "remove": "Odstranit",
+    "apply": "Uložit změny",
+    "revert": "Vrátit změny",
+    "completed": "Dokončený",
+    "not-completed": "Nedokončený"
   },
   "dashboard": "Seznam úkolů"
 }

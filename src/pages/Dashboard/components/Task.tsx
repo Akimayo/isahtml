@@ -174,7 +174,7 @@ export const TaskComponent = ({ task, handleUpdateTask, handleRemoveTask, index 
           ) : (
               <>
                 {TagColor[task.tag] && (
-                  <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag} aria-label={tag === index ? t("task.tag.apply", { color: t("color." + tag) }) : t("task.tag.remove", { color: t("color." + tag) })} />
+                  <FontAwesomeIcon color={TagColor[task.tag]} size="lg" icon={faTag} aria-label={t("task.tag.has", { color: t("color." + tag) })} />
                 )}
               </>
             )}
