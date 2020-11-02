@@ -27,13 +27,18 @@ const RegisterPage = () => {
   const history = useHistory();
   const {update} = useContext(UserContext);
 
-  const handleFormSubmit = useCallback(async (userData: RegisterFormData, {setSubmitting}: FormikHelpers<RegisterFormData>) => {
+  const handleFormSubmit = useCallback(async (userData: RegisterFormData, {setSubmitting, setFieldError}: FormikHelpers<RegisterFormData>) => {
     try {
       await AuthService.register(userData)
       setSubmitting(false);
       history.push('/login')
     } catch (error) {
-      console.error(error);
+      const errorFields = Object.keys(error.response.data.errors);
+
+      errorFields.forEach(field => {
+        setFieldError(field.charAt(0).toLowerCase() + field.slice(1), error.response.data.errors[field][0])
+      })
+
       setSubmitting(false);
     }
   }, [history, update])
@@ -66,6 +71,9 @@ const RegisterPage = () => {
                   onBlur={handleBlur}
                   value={values.email}
                 />
+                {errors.email && (
+                  <small className="text-danger">{errors.email}</small>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="username">{t('register.form.username')}</label>
@@ -78,6 +86,9 @@ const RegisterPage = () => {
                   onBlur={handleBlur}
                   value={values.username}
                 />
+                {errors.username && (
+                  <small className="text-danger">{errors.username}</small>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="fullName">{t('register.form.fullName')}</label>
@@ -90,6 +101,9 @@ const RegisterPage = () => {
                   onBlur={handleBlur}
                   value={values.fullName}
                 />
+                {errors.fullName && (
+                  <small className="text-danger">{errors.fullName}</small>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="password">{t('register.form.password')}</label>
@@ -102,6 +116,9 @@ const RegisterPage = () => {
                   onBlur={handleBlur}
                   value={values.password}
                 />
+                {errors.password && (
+                  <small className="text-danger">{errors.password}</small>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="passwordConfirmation">{t('register.form.passwordConfirmation')}</label>
@@ -114,6 +131,9 @@ const RegisterPage = () => {
                   onBlur={handleBlur}
                   value={values.passwordConfirmation}
                 />
+                {errors.passwordConfirmation && (
+                  <small className="text-danger">{errors.passwordConfirmation}</small>
+                )}
               </div>
               <button type="submit" className="btn btn-primary float-right"
                       disabled={isSubmitting}>

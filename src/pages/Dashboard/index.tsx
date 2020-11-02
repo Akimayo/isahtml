@@ -18,7 +18,6 @@ export const DashboardPage = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.log("USER ", user)
     if (user) {
       fetchTasks()
     }

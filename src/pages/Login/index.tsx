@@ -21,14 +21,19 @@ const LoginPage = () => {
   const history = useHistory();
   const { update } = useContext(UserContext);
 
-  const handleFormSubmit = useCallback(async ({ identity, password }: LoginFormData, { setSubmitting }: FormikHelpers<LoginFormData>) => {
+  const handleFormSubmit = useCallback(async ({ identity, password }: LoginFormData, { setSubmitting, setFieldError }: FormikHelpers<LoginFormData>) => {
     try {
       const response = await AuthService.login({ identity, password })
       update({ isLoading: false, user: response.data })
+      setSubmitting(false);
       history.push('/dashboard')
     } catch (error) {
-      console.error(error);
-    } finally {
+      const errorFields = Object.keys(error.response.data.errors);
+
+      errorFields.forEach(field => {
+        setFieldError(field.toLowerCase(), error.response.data.errors[field][0])
+      })
+
       setSubmitting(false);
     }
   }, [history, update])
@@ -43,7 +48,6 @@ const LoginPage = () => {
           {({
             values,
             errors,
-            touched,
             handleBlur,
             handleChange,
             handleSubmit,
@@ -61,6 +65,9 @@ const LoginPage = () => {
                     onBlur={handleBlur}
                     value={values.identity}
                   />
+                  {errors.identity && (
+                    <small className="text-danger">{errors.identity}</small>
+                  )}
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">{t('login.form.password')}</label>
@@ -73,6 +80,9 @@ const LoginPage = () => {
                     onBlur={handleBlur}
                     value={values.password}
                   />
+                  {errors.password && (
+                    <small className="text-danger">{errors.password}</small>
+                  )}
                 </div>
                 <button type="submit" className="btn btn-primary float-right" disabled={isSubmitting}>
                   {t('login.form.submit')}
