@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useContext, useEffect} from 'react'
 import useTasks from "../../hooks/useTasks"
 import { Task } from "../../entities/Task";
 import { AddTaskForm } from "./components/AddTaskForm";
@@ -7,17 +7,22 @@ import { Progress } from "../../components/Progress";
 import { useTranslation } from 'react-i18next';
 
 import './ModalBackdrop.scss';
+import {UserContext} from "../../contexts/User.context";
 
 export const DashboardPage = () => {
   const { state, actions } = useTasks()
+  const { data: { user }} = useContext(UserContext)
 
   const { fetchTasks, createTask, removeTask, updateTask } = actions
   const { loading, tasks } = state
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetchTasks()
-  }, [fetchTasks])
+    console.log("USER ", user)
+    if (user) {
+      fetchTasks()
+    }
+  }, [fetchTasks, user])
 
   if (loading === undefined) {
     return <h1>Something went wrong</h1>

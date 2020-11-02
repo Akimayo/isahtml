@@ -20,7 +20,7 @@ const Header = ({ handleLogout }: HeaderProps) => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link to="/" className="navbar-brand">{t("appName")}</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label={t("toggleNavbar")}>
-        <span className="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbar-content">
         <ul className="navbar-nav mr-auto">
@@ -43,6 +43,9 @@ const Header = ({ handleLogout }: HeaderProps) => {
             <>
               <li className="nav-item">
                 <NavLink to="/login" className="nav-link" activeClassName="active">{t("login.login")}</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/register" className="nav-link" activeClassName="active">{t("register.register")}</NavLink>
               </li>
             </>
           )}

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LoginUser, UserWithPassword } from "../entities/User";
+import {LoginUser, RegisterUser} from "../entities/User";
 import {
   DeleteResponse,
   GetCurrentUserResponse,
@@ -9,7 +9,7 @@ import {
 import { API_PATH_PREFIX } from "../constants";
 
 class AuthService {
-  static async register(user: UserWithPassword) {
+  static async register(user: RegisterUser) {
     return await axios.post<RegisterResponse>(`${API_PATH_PREFIX}/authentication/register`, user, { withCredentials: true });
   }
 

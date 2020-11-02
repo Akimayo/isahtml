@@ -11,15 +11,15 @@ interface LoginFormData {
   password: string
 }
 
+const loginFormInitialValues: LoginFormData = {
+  identity: '',
+  password: ''
+}
+
 const LoginPage = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const { update } = useContext(UserContext);
-
-  const loginFormInitialValues: LoginFormData = {
-    identity: '',
-    password: ''
-  }
 
   const handleFormSubmit = useCallback(async ({ identity, password }: LoginFormData, { setSubmitting }: FormikHelpers<LoginFormData>) => {
     try {

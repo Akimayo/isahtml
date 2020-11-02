@@ -7,7 +7,7 @@ export interface LoginResponse {
   fullName: string
 }
 
-export interface RegisterResponse { }
+export interface RegisterResponse extends User { }
 
 export interface DeleteResponse { }
 

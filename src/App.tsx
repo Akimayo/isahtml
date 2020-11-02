@@ -12,6 +12,7 @@ import AuthService from "./services/Auth.service";
 import { UserContext, UserData } from './contexts/User.context';
 import { DashboardPage } from "./pages/Dashboard";
 import { Progress } from './components/Progress';
+import RegisterPage from "./pages/Register";
 
 const initialUserData = { user: null, isLoading: false }
 
@@ -58,6 +59,7 @@ function App() {
           {!userData.user && (
             <>
               <Route path={'/login'} component={LoginPage} />
+              <Route path={'/register'} component={RegisterPage} />
             </>
           )}
 

@@ -13,6 +13,17 @@
       "submit": "Login"
     }
   },
+  "register": {
+    "register": "Register",
+    "form": {
+      "email": "Email",
+      "username": "Username",
+      "fullName": "Full Name",
+      "password": "Password",
+      "passwordConfirmation": "Password Again",
+      "submit": "Register"
+    }
+  },
   "color": {
     "0": "red",
     "1": "green",

@@ -13,6 +13,17 @@
       "submit": "Přihlásit se"
     }
   },
+  "register": {
+    "register": "Registrace",
+    "form": {
+      "email": "Email",
+      "username": "Uživatelské jméno",
+      "fullName": "Celé jméno",
+      "password": "Heslo",
+      "passwordConfirmation": "Heslo znovu",
+      "submit": "Registrovat"
+    }
+  },
   "color": {
     "0": "červená",
     "1": "zelená",
