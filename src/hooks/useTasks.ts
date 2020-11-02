@@ -32,7 +32,7 @@ const useTasks = () => {
       await TaskService.create(task);
       await fetchTasks()
     } catch (e) {
-      console.error(e)
+      throw e;
     }
   }, [fetchTasks])
 
@@ -41,7 +41,7 @@ const useTasks = () => {
       await TaskService.delete(task)
       await fetchTasks()
     } catch (e) {
-      console.error(e)
+      throw e;
     }
   }, [fetchTasks])
 
@@ -50,7 +50,7 @@ const useTasks = () => {
       await TaskService.update(task)
       tasks && setTasks([...tasks.slice(0, index), task, ...tasks.slice(index + 1)])
     } catch (e) {
-      console.error(e)
+      throw e;
     }
   }, [tasks])
 
